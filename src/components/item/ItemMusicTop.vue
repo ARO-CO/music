@@ -80,10 +80,6 @@
         props: {
             playlist: Object,
         },
-        // data(){
-        //     return {
-        //     }
-        // },
         computed:{
             // ...mapState(['backgroundUrl'])
         },

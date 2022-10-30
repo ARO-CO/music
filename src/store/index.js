@@ -21,7 +21,6 @@ export default new Vuex.Store({
     detailShow:false,//歌曲详情
     lyricList:{},//歌词
     currentTime:0,//歌曲当前时间
-    // backgroundUrl:{},
     duration:0,//歌曲时长
     isLogin:false,//是否登录
     isFooterMusic:true,//是否需要显示播放器
@@ -50,8 +49,6 @@ export default new Vuex.Store({
     updateCurrent:function(state,value){
       state.currentTime=value
     },
-    // updateBackgroundUrl:function(){
-    // },
     updateDuration:function(state,value){
       state.duration=value
     },
