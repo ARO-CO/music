@@ -28,7 +28,6 @@
 
 <script>
     import { getMusicList } from "@/request/api/home.js"
-    import axios from "axios"
     export default {
         data() {
             return {
@@ -62,7 +61,6 @@
     }
 
     .musicTop {
-        width: 100%;
         height: 30px;
         display: flex;
         justify-content: space-between;
@@ -84,10 +82,6 @@
 
     .musicContent {
         height: 200px;
-    }
-
-    .my-swipe {
-        height: 100%;
     }
 
     .musicSwpie >a >.pic {

@@ -1,5 +1,6 @@
 <template>
     <div class="musicDetail">
+        <button @click="test">test</button>
         <img :src="musicList.al.picUrl" alt="" class="detailbg">
         <div class="musicDetailTop">
             <div class="musicDetailLeft">
@@ -147,6 +148,9 @@
             onChange(value) {
                 this.updateCurrent(value)
                 this.setTime(value)
+            },
+            test(){
+                console.log(this.$route)
             }
         },
         watch: {
@@ -159,7 +163,7 @@
                     this.updatePlayListIndex((this.playListIndex + 1) % (this.musicList.length))
                 }
             },
-        }
+        },
     }
 </script>
 

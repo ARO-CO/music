@@ -8,7 +8,6 @@
 <script>
     // import { useRoute } from 'vue-router' // vue3
     import { getMusicItemList } from '@/request/api/item.js'
-    import axios from 'axios'
     import ItemMusicTop from "@/components/item/ItemMusicTop.vue"
     import ItemMusicList from '@/components/item/ItemMusicList.vue'
     export default {

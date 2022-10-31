@@ -32,11 +32,8 @@ export default {
 </script>
 
 <style>
-    .topSwipe img {
+    .topSwipe >img {
       width: 100vw;
       height: 150px;
-    }
-    .topSwipe img {
-      height: 100%;
     }
 </style>

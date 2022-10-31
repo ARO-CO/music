@@ -72,7 +72,6 @@
     .itemMusicList {
         margin-top: 50px;
         width: 100%;
-        /* height: 100%; */
         background-color: white;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
