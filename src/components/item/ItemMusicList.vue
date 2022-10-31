@@ -3,7 +3,7 @@
         <div class="itemListTop">
             <div class="listLeft">
                 <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-Playerplay"></use>
+                    <use xlink:href="#icon-bofang"></use>
                 </svg>
                 <span>
                     播放全部（共{{itemList.length}}首）
@@ -28,10 +28,10 @@
                 </div>
                 <div class="itemRight">
                     <svg class="icon" aria-hidden="true" v-if="item.mv !=0">
-                        <use xlink:href="#icon-shipin"></use>
+                        <use xlink:href="#icon-24gl-playSquare"></use>
                     </svg>
                     <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-24gl-playlistMusic3"></use>
+                        <use xlink:href="#icon-gengduo-shuxiang"></use>
                     </svg>
                 </div>
             </div>
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import { getItemMusicList } from "@/request/api/home.js"
     import { mapMutations } from 'vuex'
     export default {
         props: {
@@ -56,17 +56,14 @@
                 this.updatePlayList(this.itemList)
                 this.updatePlayListIndex(i)
             },
-            ...mapMutations(['updatePlayList', 'updatePlayListIndex', 'this.updateIsbtnShow'])
+            ...mapMutations(['updatePlayList', 'updatePlayListIndex', 'this.updateIsbtnShow']),
+            async getitemmusiclist(){
+                let res = await getItemMusicList(this.$route.params.id)
+                this.itemList = res.data.songs
+            }
         },
         mounted() {
-            // console.log(this.$route.params.id)
-            axios.get('http://localhost:3000/playlist/track/all?id=' +
-                this.$route.params.id
-                + '&limit=10&offset=1').then((res) => {
-                    // console.log(res.data)
-                    this.itemList = res.data.songs
-                    // console.log(this.itemList)
-                })
+            this.getitemmusiclist()
         }
     }
 </script>
@@ -79,6 +76,7 @@
         background-color: white;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
+        margin-bottom: 70px;
     }
 
     .itemListTop {

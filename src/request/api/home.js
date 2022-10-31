@@ -14,6 +14,12 @@ export function getMusicList (){
         url:"/personalized?limit=10"
     })
 }
+export function getItemMusicList(data){
+    return service ({
+        methods:"GET",
+        url:`/playlist/track/all?id=${data}&limit=10&offset=1`
+    })
+}
 // 搜索
 export function getSearchMusic(data){
     return service ({

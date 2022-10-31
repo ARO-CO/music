@@ -7,7 +7,7 @@
 
 <script>
     // import { useRoute } from 'vue-router' // vue3
-    // import { getMusicItemList } from '@/request/api/item.js'
+    import { getMusicItemList } from '@/request/api/item.js'
     import axios from 'axios'
     import ItemMusicTop from "@/components/item/ItemMusicTop.vue"
     import ItemMusicList from '@/components/item/ItemMusicList.vue'
@@ -20,15 +20,7 @@
             }
         },
         mounted() {
-            // console.log(this.$route.params.id)
-            axios.get('http://localhost:3000/playlist/detail?id=' + this.$route.params.id).then((res) => {
-                this.playlist = res.data.playlist
-
-                this.subscribedCount = this.changeNum(this.playlist.subscribedCount)
-
-                // console.log(this.playlist)
-                // console.log(this.subscribedCount)
-            })
+            this.getmusicitemlist()
         },
         methods: {
             changeNum(num) {
@@ -36,12 +28,13 @@
                     return (num / 100000000).toFixed(1) + "亿"
                 else if (num >= 10000)
                     return (num / 10000).toFixed(1) + "万"
+            },
+            async getmusicitemlist() {
+                let res = await getMusicItemList(this.$route.params.id)
+                this.playlist = res.data.playlist
+                this.subscribedCount = this.changeNum(this.playlist.subscribedCount)
             }
         }
 
     }
 </script>
-
-<style>
-
-</style>

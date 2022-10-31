@@ -4,16 +4,18 @@
         <div class="musicDetailTop">
             <div class="musicDetailLeft">
                 <svg class="icon" aria-hidden="true" @click="updateDetailShow">
-                    <use xlink:href="#icon-houtui"></use>
+                    <use xlink:href="#icon-shouqi"></use>
                 </svg>
                 <div clas="leftMarquee">
                     <rolling-marquee style="color:#fff">{{musicList.al.name}}</rolling-marquee>
-                    <span v-for="(item,i) in musicList.ar" :key="i">
-                        {{item.name}}
-                    </span>
-                    <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-Playerplay"></use>
-                    </svg>
+                    <div class="topName">
+                        <span v-for="(item,i) in musicList.ar" :key="i">
+                            {{item.name}}
+                        </span>
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-xiangyoujiantou"></use>
+                        </svg>
+                    </div>
                 </div>
             </div>
             <div class="musicDetailRight">
@@ -29,49 +31,49 @@
         </div>
         <div class="musicLyric" v-show="isLyricShow" @click="lyricShow()" ref="musicLyric">
             <p v-for="(item,i) in lyric" :key="i"
-            :class="{lyricActive:(currentTime *1000>=item.time && currentTime *1000<item.pre)}">
+                :class="{lyricActive:(currentTime *1000>=item.time && currentTime *1000<item.pre)}">
                 {{item.lrc}}
             </p>
         </div>
         <div class="musicDetailFooter">
             <div class="footerTop">
                 <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-houtui"></use>
+                    <use xlink:href="#icon-aixin"></use>
                 </svg>
                 <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-houtui"></use>
+                    <use xlink:href="#icon-xiazai-wenjianxiazai-07"></use>
                 </svg>
                 <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-houtui"></use>
+                    <use xlink:href="#icon-lingsheng"></use>
                 </svg>
                 <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-houtui"></use>
+                    <use xlink:href="#icon-pinglun"></use>
                 </svg>
                 <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-houtui"></use>
+                    <use xlink:href="#icon-gengduo-shuxiang"></use>
                 </svg>
             </div>
             <div class="footerContent">
-                <van-slider v-model="currentTime" @change="onChange" :max="duration" :min="0"/>
+                <van-slider v-model="currentTime" @change="onChange" :max="duration" :min="0" />
             </div>
             <div class="footer">
                 <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-houtui"></use>
+                    <use xlink:href="#icon-liebiaoxunhuan"></use>
                 </svg>
                 <svg class="icon" aria-hidden="true" @click="goPlay(-1)">
-                    <use xlink:href="#icon-houtui"></use>
+                    <use xlink:href="#icon-shangyishoushangyige"></use>
                 </svg>
                 <svg class="icon" aria-hidden="true" v-if="isbtnShow" @click="play">
-                    <use xlink:href="#icon-Playerplay"></use>
+                    <use xlink:href="#icon-bofang"></use>
                 </svg>
                 <svg class="icon" aria-hidden="true" v-else @click="play">
-                    <use xlink:href="#icon-Playerplay"></use>
+                    <use xlink:href="#icon-zanting"></use>
                 </svg>
                 <svg class="icon" aria-hidden="true" @click="goPlay(1)">
-                    <use xlink:href="#icon-houtui"></use>
+                    <use xlink:href="#icon-xiayigexiayishou"></use>
                 </svg>
                 <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-houtui"></use>
+                    <use xlink:href="#icon-24gl-playlistMusic3"></use>
                 </svg>
             </div>
         </div>
@@ -82,85 +84,81 @@
     import { mapMutations, mapState } from 'vuex'
     import RollingMarquee from "vue-rolling-marquee";
     export default {
-        props: ['musicList','play','setTime'],
+        props: ['musicList', 'play', 'setTime'],
         components: {
             RollingMarquee
         },
-        data(){
+        data() {
             return {
-                isLyricShow:false,
+                isLyricShow: false,
                 lyric: {},
             }
         },
         computed: {
             ...mapState(['detailShow',
-            'isbtnShow',
-            'lyricList',
-            'currentTime',
-            'playListIndex',
-            'duration']),
+                'isbtnShow',
+                'lyricList',
+                'currentTime',
+                'playListIndex',
+                'duration']),
         },
         methods: {
-            ...mapMutations(['updateDetailShow','updateIsbtnShow','updateCurrent','updatePlayListIndex']),
-            lyricShow(){
+            ...mapMutations(['updateDetailShow', 'updateIsbtnShow', 'updateCurrent', 'updatePlayListIndex']),
+            lyricShow() {
                 this.isLyricShow = !this.isLyricShow
 
                 let arr;
-                if(this.lyricList.lyric){
-                    // console.log(this.lyricList.lyric)
-                    arr=this.lyricList.lyric.split(/[(\r\n)\r\n]+/).map((item,i)=>{
-                        let min = item.slice(1,3)
-                        let sec = item.slice(4,6)
-                        let mill = item.slice(7,10)
-                        let lrc = item.slice(11,item.length)
-                        let time = parseInt(min)*60*1000 + parseInt(sec)*1000 + parseInt(mill)
+                if (this.lyricList.lyric) {
+                    arr = this.lyricList.lyric.split(/[(\r\n)\r\n]+/).map((item, i) => {
+                        let min = item.slice(1, 3)
+                        let sec = item.slice(4, 6)
+                        let mill = item.slice(7, 10)
+                        let lrc = item.slice(11, item.length)
+                        let time = parseInt(min) * 60 * 1000 + parseInt(sec) * 1000 + parseInt(mill)
                         // console.log(item)
-                        if(isNaN(Number(mill))){
-                            mill = item.slice(7,9)
-                            lrc = item.slice(10,item.length)
-                            time = parseInt(min)*60*1000 + parseInt(sec)*1000 + parseInt(mill)
+                        if (isNaN(Number(mill))) {
+                            mill = item.slice(7, 9)
+                            lrc = item.slice(10, item.length)
+                            time = parseInt(min) * 60 * 1000 + parseInt(sec) * 1000 + parseInt(mill)
                         }
-                        return {min,sec,mill,lrc,time}
+                        return { min, sec, mill, lrc, time }
                     })
                 }
                 this.lyric = arr
-                arr.forEach((item,i) => {
-                    if(i===arr.length-1 || isNaN(arr[i+1].time)){
+                arr.forEach((item, i) => {
+                    if (i === arr.length - 1 || isNaN(arr[i + 1].time)) {
                         item.pre = 100000
                     }
-                    else{
-                        item.pre = arr[i+1].time
+                    else {
+                        item.pre = arr[i + 1].time
                     }
                 });
                 // console.log(arr)
             },
-            goPlay(num){
-                let index = this.playListIndex+num
-                if(index<0){
-                    index = this.musicListIndex-1
-                }else if(index == this.musicList.length){
+            goPlay(num) {
+                let index = this.playListIndex + num
+                if (index < 0) {
+                    index = this.musicListIndex - 1
+                } else if (index == this.musicList.length) {
                     index = 0
                 }
                 this.updatePlayListIndex(index)
             },
-            onChange(value){
+            onChange(value) {
                 this.updateCurrent(value)
                 this.setTime(value)
             }
         },
-        mounted() {
-            // console.log(this.lyricList.lyric)
-        },
-        watch:{
-            currentTime:function(){
-                let p= document.querySelector("p.lyricActive")
-                if(p && p.offsetTop>300){
-                    this.$refs.musicLyric.scrollTop=p.offsetTop-300
+        watch: {
+            currentTime: function () {
+                let p = document.querySelector("p.lyricActive")
+                if (p && p.offsetTop > 300) {
+                    this.$refs.musicLyric.scrollTop = p.offsetTop - 300
                 }
-                if(this.$refs.ended){
-                    this.updatePlayListIndex((playListIndex+1)%(this.musicList.length))
+                if (this.$refs.ended) {
+                    this.updatePlayListIndex((this.playListIndex + 1) % (this.musicList.length))
                 }
-            }
+            },
         }
     }
 </script>
@@ -173,6 +171,7 @@
         height: 100vh;
         width: 100vw;
     }
+
     .detailbg {
         width: 100vw;
         height: 100%;
@@ -202,14 +201,13 @@
         margin-left: 20px;
     }
 
-    .leftMarquee icon {
-        width: 15px;
-        height: 15px;
+    .topName .icon {
+        width: 10px;
+        height: 10px;
     }
 
     .musicDetailContent {
         width: 100%;
-        /* height: 70vh; */
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -217,20 +215,21 @@
     }
 
     .needle {
-        width: 5rem;
-        height: 8rem;
-        top: -13rem;
+        width: 2rem;
+        height: 3rem;
+        top: -5.5rem;
         position: absolute;
         left: 46%;
         transform-origin: 0 0;
-        transform: rotate(-10deg);
+        transform: rotate(0deg);
         transition: all 2s;
         z-index: 1;
     }
+
     .needle_active {
-        width: 5rem;
-        height: 8rem;
-        top: -13rem;
+        width: 2rem;
+        height: 3rem;
+        top: -5.5rem;
         position: absolute;
         left: 46%;
         transform-origin: 0 0;
@@ -239,51 +238,62 @@
     }
 
     .cd {
-        width: 18rem;
-        height: 18rem;
-        top: -10rem;
+        width: 5.5rem;
+        height: 5.5rem;
+        top: -4rem;
         position: absolute;
         bottom: -12.25rem;
         z-index: -1;
     }
 
     .cdimg {
-        width: 12rem;
-        height: 12rem;
-        top: -7rem;
+        width: 3.5rem;
+        height: 3.5rem;
+        top: -3rem;
         border-radius: 50%;
         position: absolute;
         bottom: -150px;
         animation: rotate_cd 10s linear infinite;
     }
+
     @keyframes rotate_cd {
         0% {
             transform: rotateZ(0deg);
         }
+
         100% {
             transform: rotateZ(360deg);
         }
     }
+
     .cd_active {
-        animation-play-state: running ;
+        animation-play-state: running;
     }
+
     .cd_paused {
         animation-play-state: paused;
     }
+
     .musicDetailFooter {
         display: flex;
         flex-direction: column;
     }
+
     .footerTop {
         display: flex;
     }
+
+    .footerContent {
+        margin: 20px 0;
+    }
+
     .footerTop svg {
         flex: 1;
     }
     .footer {
         display: flex;
     }
-    .footer svg {
+    .footer >svg {
         flex: 1;
     }
 
@@ -297,15 +307,20 @@
         overflow: scroll;
         scroll-behavior: smooth;
     }
+
     .musicLyric p {
         color: #fff;
         margin-bottom: 20px;
         opacity: 50%;
         scroll-behavior: smooth;
     }
+
     .lyricActive {
         font-size: 25px;
     }
+
     /* 隐藏滚动条 */
-    ::-webkit-scrollbar {display:none}
+    ::-webkit-scrollbar {
+        display: none
+    }
 </style>

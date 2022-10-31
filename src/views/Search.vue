@@ -20,7 +20,6 @@
 
 <script>
     import { getSearchMusic } from "@/request/api/home.js"
-    import axios from "axios"
     export default {
         data() {
             return {
@@ -42,10 +41,6 @@
                     localStorage.setItem('keyWordList', JSON.stringify(this.keyWordList))
 
                     let res = await getSearchMusic(this.searchKey)
-                    // axios.get('http://localhost:3000/cloudsearch?keywords=' + this.searchKey).then((res) => {
-                    //     this.searchList = res.data.result.songs
-                    //     console.log(res)
-                    // })
                     this.searchList = res.data.result.songs
                     // console.log(res)
                     this.searchKey = ""
@@ -100,7 +95,7 @@
         display: inline-block;
     }
 
-    .searchHistory .icon {
+    .searchHistory >.icon {
         width: 15px;
         height: 15px;
         position: absolute;

@@ -3,7 +3,7 @@
         <div class="itemMusicTop">
             <div class="topLeft">
                 <svg class="icon" aria-hidden="true" @click="$router.go(-1)">
-                    <use xlink:href="#icon-houtui"></use>
+                    <use xlink:href="#icon-shouqi"></use>
                 </svg>
                 <span style="font-weight:bold" class="gedan">歌单</span>
             </div>
@@ -12,7 +12,7 @@
                     <use xlink:href="#icon-sousuo"></use>
                 </svg>
                 <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-24gl-playlistMusic3"></use>
+                    <use xlink:href="#icon-gengduo-shuxiang"></use>
                 </svg>
             </div>
         </div>
@@ -75,18 +75,11 @@
 </template>
 
 <script>
-    import { mapMutations, mapState } from 'vuex'
     export default {
         props: {
             playlist: Object,
         },
-        computed:{
-            // ...mapState(['backgroundUrl'])
-        },
-        // mounted() {
-        // },
         methods: {
-            // ...mapMutations(['updateBackgroundUrl']),
             changeNum(num) {
                 if (num >= 10000000)
                     return (num / 100000000).toFixed(1) + "亿"
@@ -103,7 +96,6 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        /* padding: 100px; */
     }
 
     topLeft,
@@ -211,7 +203,7 @@
         display: flex;
     }
 
-    .action svg {
+    .action .icon {
         width: 30px;
         height: 30px;
     }
@@ -219,7 +211,7 @@
     .details .cover .playCount {
         /* 怎样给playcount定位？ */
         position: relative;
-        top: 1rem;
+        top: 0.4rem;
         left: 15%;
     }
     

@@ -8,16 +8,16 @@
             </div>
         </div>
         <div class="footRight">
-            <svg class="icon" aria-hidden="true" v-if="updateIsbtnShow" @click="play">
-                <use xlink:href="#icon-Playerplay"></use>
+            <svg class="icon" aria-hidden="true" v-if="isbtnShow" @click="play">
+                <use xlink:href="#icon-bofang"></use>
             </svg>
             <svg class="icon" aria-hidden="true" v-else @click="play">
-                <use xlink:href="#icon-Playerplay"></use>
+                <use xlink:href="#icon-zanting"></use>
             </svg>
             <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-24gl-playlistMusic3"></use>
             </svg>
-            <audio ref="audio" @timeupdate="timeUpdate" preload="auto"
+            <audio ref="audio" @timeupdate="timeUpdate" preload="auto" 
             :src="`https://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3`"></audio>
             <van-popup v-model="detailShow" position="bottom" :style="{ height: '100%',width:'100%' }">
                 <MusicDetail :musicList="playList[playListIndex]" :play="play" :setTime="setTime"/>
@@ -69,7 +69,6 @@
                 }
                 this.$store.dispatch("getLyric",this.playList[this.playListIndex].id)
                 this.updateDuration(this.$refs.audio.duration)
-                // console.log(this.$refs.audio.duration)
             },
             playList: function () {
                 if(this.IsbtnShow){
@@ -77,7 +76,6 @@
                     tihs.updateIsbtnShow(false)
                 }
             },
-            
         },
     }
 </script>
@@ -113,7 +111,7 @@
         justify-content: space-between;
         align-items: center;
     }
-    .footMusic .icon {
+    .footMusic >.footRight >.icon {
         width: 30px;
         height: 30px;
     }

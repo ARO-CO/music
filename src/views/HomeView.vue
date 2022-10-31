@@ -21,9 +21,3 @@ export default {
 }
 }
 </script>
-
-<style>
-  body {
-    /* width: 350px; */
-  }
-</style>
