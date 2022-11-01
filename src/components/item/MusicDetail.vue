@@ -106,7 +106,6 @@
             ...mapMutations(['updateDetailShow', 'updateIsbtnShow', 'updateCurrent', 'updatePlayListIndex']),
             lyricShow() {
                 this.isLyricShow = !this.isLyricShow
-
                 let arr;
                 if (this.lyricList.lyric) {
                     arr = this.lyricList.lyric.split(/[(\r\n)\r\n]+/).map((item, i) => {
@@ -124,7 +123,6 @@
                         return { min, sec, mill, lrc, time }
                     })
                 }
-                this.lyric = arr
                 arr.forEach((item, i) => {
                     if (i === arr.length - 1 || isNaN(arr[i + 1].time)) {
                         item.pre = 100000
@@ -133,7 +131,7 @@
                         item.pre = arr[i + 1].time
                     }
                 });
-                // console.log(arr)
+                this.lyric = arr
             },
             goPlay(num) {
                 let index = this.playListIndex + num

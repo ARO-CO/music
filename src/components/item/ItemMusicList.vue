@@ -41,7 +41,7 @@
 
 <script>
     import { getItemMusicList } from "@/request/api/home.js"
-    import { mapMutations } from 'vuex'
+    import { mapMutations,mapState } from 'vuex'
     export default {
         props: {
             subscribedCount: String
@@ -51,10 +51,14 @@
                 itemList: [],
             }
         },
+        computed:{
+            ...mapState(["playList","playListIndex"])
+        },
         methods: {
             playMusic:function(i){
                 this.updatePlayList(this.itemList)
                 this.updatePlayListIndex(i)
+                this.$store.dispatch("getLyric",this.playList[this.playListIndex].id)
             },
             ...mapMutations(['updatePlayList', 'updatePlayListIndex', 'this.updateIsbtnShow']),
             async getitemmusiclist(){

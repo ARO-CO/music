@@ -34,6 +34,5 @@
                 this.subscribedCount = this.changeNum(this.playlist.subscribedCount)
             }
         }
-
     }
 </script>

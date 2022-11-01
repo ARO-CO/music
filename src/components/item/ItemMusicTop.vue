@@ -60,7 +60,6 @@
                     <use xlink:href="#icon-xiazai-wenjianxiazai-07"></use>
                 </svg>
                 <br />
-                <!-- {{playlist.subscribedCount}} -->
                 下载
             </div>
             <div>
